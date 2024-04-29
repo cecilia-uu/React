@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>2_使用js创建虚拟DOM</title>
+</head>
+<body>
+    <!--prepare a container-->
+    <div id="test"></div>
+
+
+    <!-- import dependencies, pay attention to the order -->
+    <!-- import react core repo -->
+    <script type="text/javascript" src="../js/react.development.js"></script>
+    <!-- import react-dom, supporting react operates DOM -->
+    <script type="text/javascript" src="../js/react-dom.development.js"></script>
+
+    <script type="text/javascript"> /* we must write babel here 
+    as by default the system assumes it as JS. We write JSX, using babel to revert
+    it to JS.
+    */
+        // 1. create virtual DOM
+        const VDOM = React.createElement('h1', {id:'title'}, 'Hello, react')
+        // 2. render it to the page
+        ReactDOM.render(VDOM,document.getElementById('test'))
+    </script>
+
+</body>
+</html>
