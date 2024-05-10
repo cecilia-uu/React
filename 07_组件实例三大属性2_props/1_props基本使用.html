@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>state</title>
+</head>
+<body>
+    <!--prepare a container-->
+    <div id="test1"></div>
+    <div id="test2"></div>
+    <div id="test3"></div>
+
+    <!-- import dependencies, pay attention to the order -->
+    <!-- import react core repo -->
+    <script type="text/javascript" src="../js/react.development.js"></script>
+    <!-- import react-dom, supporting react operates DOM -->
+    <script type="text/javascript" src="../js/react-dom.development.js"></script>
+    <!-- import babel, inverting jsx into js -->
+    <script type="text/javascript" src="../js/babel.min.js"></script>
+
+    <script type="text/babel"> /* we must write babel here 
+    as by default the system assumes it as JS. We write JSX, using babel to revert
+    it to JS.
+    */
+   
+        // 1. 创建组件
+        class Person extends React.Component {
+            render() {
+                console.log(this);
+                const {name,age,sex} = this.props
+                return (
+                    <ul>
+                        <li>姓名：{name}</li>
+                        <li>性别：{sex}</li>
+                        <li>年龄：{age+1}</li>
+                    </ul> 
+                )
+            }
+        }
+        ReactDOM.render(<Person name="tom" age={19} sex="female"/>,document.getElementById('test1'))
+        ReactDOM.render(<Person name="jerry" age={19} sex="female"/>,document.getElementById('test2'))
+        const p = {name:'Liu',age:18,sex:"female"}
+        // 传递标签属性
+        ReactDOM.render(<Person {...p}/>,document.getElementById('test3')) // 标签属性才可以用展开运算符
+    </script>
+
+</body>
+</html>
