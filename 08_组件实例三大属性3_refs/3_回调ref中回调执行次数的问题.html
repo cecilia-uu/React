@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>3_回调ref中回调执行次数的问题</title>
+</head>
+<body>
+    <!--prepare a container-->
+    <div id="test"></div>
+
+    <!-- import dependencies, pay attention to the order -->
+    <!-- import react core repo -->
+    <script type="text/javascript" src="../js/react.development.js"></script>
+    <!-- import react-dom, supporting react operates DOM -->
+    <script type="text/javascript" src="../js/react-dom.development.js"></script>
+    <!-- import babel, inverting jsx into js -->
+    <script type="text/javascript" src="../js/babel.min.js"></script>
+
+    <script type="text/babel"> /* we must write babel here 
+    as by default the system assumes it as JS. We write JSX, using babel to revert
+    it to JS.
+    */
+   
+        // 1. 创建组件
+        class Demo extends React.Component {
+
+            state = {isHot:true}
+            
+            showInfo = () => {
+                const {input1} = this
+                alert(input1.value)
+            }
+            
+            changeWether = () => {
+                const {isHot} = this.state
+                this.setState({isHot:!isHot})
+            }
+
+            saveInfo = (c) => {
+                this.input1 = c
+                console.log('@',c);
+            }
+            render() {
+                const {isHot} = this.state
+                return (
+                    <div>
+                        <h2>今天天气很{isHot ? 'hot':'cold'}</h2>
+                        <input ref={this.saveInfo} type="text"/><br/><br/>
+                        {/*内联*/}
+                        {/*<input ref={(currentNode=>{this.input1 = currentNode;console.log('@',currentNode);})} type="text"/>&nbsp;*/}
+                        <button onClick={this.showInfo}>点我提示左侧数据</button>&nbsp;
+                        <button onClick={this.changeWether}>点我切换天气</button>
+                    </div>  
+                )
+            }
+        }
+        ReactDOM.render(<Demo/>,document.getElementById('test'))
+    </script>
+
+</body>
+</html>
